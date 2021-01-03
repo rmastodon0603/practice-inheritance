@@ -1,8 +1,7 @@
 package org.itstep.task02;
 
-import org.itstep.PaymentTypes;
 import org.itstep.task01.Employee;
-// @formatter:off
+
 /**
  * Задание 2
  *
@@ -25,24 +24,55 @@ import org.itstep.task01.Employee;
  Петров  |       15% | 5500.0      | 4675.0
  Итого   |           |             | 7865.0
  */
-// @formatter:on
 
-public class Main {
-    public static void main(String[] args) {
-        // FIXME: Раскомментируйте код
-        Employee[] employees = { // Обратите внимание, что мы создаем массив типа Employee, и помещаем данные
-                                   // типа EmployeeAndTax! Подумайте, почему такое возможно?
-                new EmployeeAndTax("Иванов", PaymentTypes.RATE, 3000),
-                new EmployeeAndTax("Сидоров", PaymentTypes.HOURLY, 800),
-                new EmployeeAndTax("Петров", PaymentTypes.JOB_PRICE, 5500)
-        };
-        System.out.println("  ФИО    |  Налог, % | Сумма (грн) | К оплате (грн)\n" +
-                "---------|-----------|-------------|---------------");
-        double sum = 0;
-        for (Employee employee : employees) {
-            sum += employee.getPaymentWithTax();
-            System.out.println(employee);
-        }
-        System.out.println(" Итого   |           |             | " + sum);
+public class EmployeeAndTax extends Employee {
+
+    private double tax;
+    private double payment;
+
+    public EmployeeAndTax(String fullName, String paymentType, double payment)
+    {
+        super(fullName, paymentType, payment);
+        this.payment = payment;
     }
+
+    public double getTax() {
+        return tax;
+    }
+
+    @Override
+    public void setPaymentType(String paymentType) {
+
+        if(paymentType == "ставка" || paymentType == "сдельная")
+        {
+            tax = 15;
+        }
+        else
+        {
+            tax = 20;
+        }
+
+        super.setPaymentType(paymentType);
+    }
+
+    @Override
+    public double getPaymentWithTax() {
+        setPayment(getPayment() - getPayment()*tax/100);
+        return getPayment();
+    }
+
+    public String toString()
+    {
+        String str = new String();
+
+        str = getFullName() + " | " + tax + "%" + " | " + payment + " | " + super.getPayment();
+
+        return str;
+    }
+
+    public void setTax(double tax) {
+        this.tax = tax;
+    }
+
+
 }
