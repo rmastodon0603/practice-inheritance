@@ -1,8 +1,6 @@
 package org.itstep.task03;
 
-import org.itstep.PaymentTypes;
-import org.itstep.task01.Employee;
-// @formatter:off
+import org.itstep.task02.EmployeeAndTax;
 /**
  * Задание 3
  *
@@ -23,23 +21,27 @@ import org.itstep.task01.Employee;
  Петров  |       20% | 5500.0      | 4400.0
  Итого   |           |             | 7590.0
  */
-// @formatter:on
+public class EmployeeAndChild extends EmployeeAndTax {
+    private boolean hasChild;
 
-public class Main {
-    public static void main(String[] args) {
-        // FIXME: Раскомментируйте код
-        Employee[] employees = {
-                new EmployeeAndChild("Иванов", PaymentTypes.RATE, 3000, true),
-                new EmployeeAndChild("Сидоров", PaymentTypes.HOURLY, 800, true),
-                new EmployeeAndChild("Петров", PaymentTypes.JOB_PRICE, 5500)
-        };
-        System.out.println("  ФИО    |  Налог, % | Сумма (грн) | К оплате (грн)\n" +
-                "---------|-----------|-------------|---------------");
-        double sum = 0;
-        for (Employee employee : employees) {
-            sum += employee.getPaymentWithTax();
-            System.out.println(employee);
-        }
-        System.out.println(" Итого   |           |             | " + sum);
+    public EmployeeAndChild(String fullName, String paymentType, double payment)
+    {
+        super(fullName, paymentType, payment);
+        setTax(getTax() + 5);
+    }
+
+    public EmployeeAndChild(String fullName, String paymentType, double payment, boolean hasChild)
+    {
+        super(fullName, paymentType, payment);
+
+        this.hasChild = hasChild;
+    }
+
+    public void setHasChild(boolean hasChild) {
+        this.hasChild = hasChild;
+    }
+
+    public boolean isHasChild() {
+        return hasChild;
     }
 }
