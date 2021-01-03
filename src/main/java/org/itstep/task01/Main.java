@@ -1,6 +1,9 @@
 package org.itstep.task01;
 
 // @formatter:off
+
+import org.itstep.PaymentTypes;
+
 /**
  * Задание 1
  *
@@ -26,17 +29,17 @@ package org.itstep.task01;
 public class Main {
     public static void main(String[] args) {
         // FIXME: Раскомментируйте код
-//        Employee[] employees = { // Создаем массив сотрудников
-//                new Employee("Иванов",  PaymentTypes.RATE, 3000),
-//                new Employee("Сидоров", PaymentTypes.HOURLY, 800),
-//                new Employee("Петров",  PaymentTypes.JOB_PRICE, 5500)
-//        };
-//        System.out.println("  ФИО    |  Вид оплаты  |  Сумма\n---------|--------------|------------");
-//        double sum = 0;
-//        for (Employee employee : employees) {
-//            System.out.println(employee);
-//            sum += employee.getPayment();
-//        }
-//        System.out.println(" Итого   |              | " + sum + " грн");
+        Employee[] employees = { // Создаем массив сотрудников
+                new Employee("Иванов",  PaymentTypes.RATE, 3000),
+                new Employee("Сидоров", PaymentTypes.HOURLY, 800),
+                new Employee("Петров",  PaymentTypes.JOB_PRICE, 5500)
+        };
+        System.out.println("  ФИО    |  Вид оплаты  |  Сумма\n---------|--------------|------------");
+        double sum = 0;
+        for (Employee employee : employees) {
+            System.out.println(employee);
+            sum += employee.getPayment();
+        }
+        System.out.println(" Итого   |              | " + sum + " грн");
     }
 }
